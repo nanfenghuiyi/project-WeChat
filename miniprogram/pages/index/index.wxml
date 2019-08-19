@@ -1,0 +1,56 @@
+<!-- 导航 -->
+<view class="navbar"> 
+  <text wx:for="{{navbar}}" wx:key="index" data-idx="{{index}}" class="item {{currentTab==index?'active':''}}" bindtap="navbarTap">{{item}}</text>
+</view>
+<!-- 排行榜 --> 
+<view class="top" hidden="{{currentTab!==0}}">
+  <view class="item" wx:for="{{music_item}}" wx:key="index" bindtap="toplistTap" data-id="{{item.id}}" data-title="{{item.title}}">
+    <!-- 左 -->
+    <view class="media"> 
+      <image class="img" src="https://y.gtimg.cn/music/photo_new/{{item.pic}}?max_age=2592000"></image>
+      <!-- <text class="count">1940万</text> -->
+    </view>
+    <!-- 右 -->
+    <view class="info">
+      <text class="title">{{item.title}}</text>
+      <view class="text" wx:for="{{music_list[index]}}" wx:key="index">
+        {{index+1}}
+        <text>{{item.name}}</text>
+        - {{item.singer}}
+      </view>
+    </view>
+    <view class="arrow"></view>
+  </view>
+</view>
+
+<!--搜索-->
+<view class="search" hidden="{{currentTab!==1}}">
+  <view class="search-bar">
+    <view class="search-wrap">
+        <icon type="search" size="16" class="icon-search" />
+        <input type="text" placeholder="搜索歌曲、歌单、专辑" class="search-input" name="searchKeyword" bindinput="keywordInput" value="{{searchKeyword}}" />
+        <icon wx:if="{{clearShow}}" type="clear" size="16" class="icon-cancel" bindtap="keywordclear"></icon>
+    </view>
+    <view class="search-cancel" bindtap="keywordSearch">搜索</view>
+  </view>
+  <view class="search-hot" hidden="{{searchLoading || searchLoadingComplete}}">
+    <text class="hot-title">热门搜索</text>
+    <view class="hot-wrap">
+      <text class="hot-item hot">{{hotlist[0].k}}</text>
+      <text class="hot-item" wx:for="{{hotlist}}" wx:key="index" data-text="{{item.k}}" bindtap="hotkeyTap" wx:if="{{0<index&&index<15}}" >{{item.k}}</text>
+    </view>
+  </view>
+  <view class="search-result">
+    <scroll-view scroll-y="true" bindscrolltolower="searchScrollLower">
+      <view class="result-item" wx:for="{{searchlist}}" wx:key="index"  data-data="{{item}}" bindtap="playsongTap">
+        <view class="icon{{item.isonly=='0' ? ' nocopyright' : ''}}"></view>
+        <text class="title">{{item.songname}}</text>
+        <view class="subtitle">
+          <text wx:for="{{item.singer}}" wx:key="index">{{item.name}}</text>
+        </view>
+      </view>
+      <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view>
+      <view class="loading complete" hidden="{{!searchLoadingComplete}}">已加载全部</view>
+    </scroll-view>
+  </view>
+</view>

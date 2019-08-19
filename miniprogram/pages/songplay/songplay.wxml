@@ -1,0 +1,37 @@
+<view class="main-wrap">
+	<view class="main">
+		<view class="song-info">
+			<image class="img" src="{{pic}}"></image>
+			<view class="info">
+				<text class="song-name">{{playdata.name||playdata.songname}}</text>
+				<view class="singer-name">
+					<text>{{singer}}</text>
+				</view>
+			</view>
+			<view class="play {{isPlayAudio ? '' : 'pause'}}" catchtap='playAudio'></view>
+		</view>
+		<!-- <view class="song-lyric">
+			<image class="img {{isPlaying ? '' : 'pause'}}" src="{{pic}}"></image>
+		</view> -->
+    <view class="songPic">
+			<image class="img {{ (playStatus || sliderValue>=99) ? 'pause' : ''}}" src="{{pic}}"></image>
+		</view>
+		<view class="song-control">
+			<view class="progress">
+				<text class="time-start">{{showTime1}}</text>
+        <view class='bottom' catchtap='playAudio'>
+          <view class='slider'>
+            <slider bindchange='sliderChange' activeColor='red' block-size="12" value='{{audioTime}}' />
+          </view>
+        </view>
+				<!-- <view class="time-bar">
+					<view class="time-play" style="transform: translateX({{playdata.lrc}}%)"></view>
+				</view> -->
+				<text class="time-total">{{showTime2}}</text>
+			</view>
+		</view>
+	</view>
+	<view class="bg" style="background-image:url({{pic}})"></view>
+</view>
+
+

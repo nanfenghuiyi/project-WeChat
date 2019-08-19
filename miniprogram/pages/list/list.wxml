@@ -1,0 +1,24 @@
+<!-- 排行榜 -->
+<view class="toplist-focus">
+	<view class="focus-bg" style="background-image: url(https://y.gtimg.cn/music/photo_new/T003R300x300M000000AK9z43zh5t1.jpg?max_age=2592000)"></view>
+	<view class="focus-info"> 
+		<view class="focus-text">
+			<text class="focus-tit">{{musictitle}}</text>
+			<!-- <text class="focus-desc">2019-08-02 更新</text> -->
+		</view>
+		<view class="focus-play"></view>
+	</view>
+</view>
+
+<view class="song-list">
+	<view class="song-item" wx:for="{{list}}" wx:key="index" data-data="{{item}}" bindtap="playsong">
+		<text class="song-number">{{index+1}}</text>
+		<view class="song-body">
+			<text class="song-tit">{{item.name}}</text>
+			<view class="song-desc">
+				<text>{{item.singer}}</text>
+				<text> · {{item.name}}</text>
+			</view>
+		</view>
+	</view>
+</view>
